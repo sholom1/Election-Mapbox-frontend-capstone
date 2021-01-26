@@ -84,6 +84,7 @@ export const postElectionmapThunk = (body) => (dispatch) => {
 
 // post districtLayers thunk
 export const postDistrictLayersThunk = (body) => (dispatch) => {
+  console.log('this is the body', body);
   return axios
     .post('http://localhost:8080/api/districtlayer/', body)
     .then((res) => res.data)
