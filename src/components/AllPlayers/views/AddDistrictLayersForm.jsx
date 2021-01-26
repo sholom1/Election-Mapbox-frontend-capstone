@@ -6,16 +6,20 @@ class AddDistrictLayersForm extends Component {
         super(props);
         this.state = { 
             districtKey: '',
-            districtLayers: '',
+            districtLayers: null,
          }
+
+         this.handleChange = this.handleChange.bind(this);
+         this.handleUpload = this.handleUpload.bind(this);
+
     }
 
-    handleChange = (event) => {
+    handleChange (event) {
         event.preventDefault();
         this.setState({
                 districtLayers: event.target.files,
         });
-        console.log(this.state);
+        console.log('state', this.state);
     }
 
     handleUpload = () => {
@@ -23,23 +27,25 @@ class AddDistrictLayersForm extends Component {
         for(let i=0; i<this.state.districtLayers.length; i++){
             data.append('file', this.state.districtLayers[i])
         }
-        console.log('state', this.state);
-        data.append(this.state.districtKey);
+        data.append('districtKey', this.state.districtKey);
 
-        console.log('inside handleUpload');
 
+        for (var key of data.entries()) {
+            console.log(key[0] + ', ' + key[1]);
+        }
         this.props.postDistrictLayers(data);
     }
 
     render() { 
+        console.log('state in render', this.state);
         return ( 
             <div>
                 <label>
                     District Key: 
                     <input type='text' name='districtKey' onChange={ this.handleChange } value={ this.state.districtKey } />
                 </label>
-                <input type='file' multiple onChange={ this.state.handleChange } />
-                <button type='button' onClick={ this.state.handleUpload }>Upload</button>
+                <input type='file' multiple onChange={ this.handleChange } />
+                <button type='button' onClick={ this.handleUpload }>Upload</button>
             </div>
          );
     }
