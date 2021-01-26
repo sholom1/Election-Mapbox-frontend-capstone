@@ -9,10 +9,9 @@ class AddElectionmapForm extends Component {
 
         this.state = {
             name: '',
-            districtKey: '',
-            excelFiles: '',
-            districtLayers: '',
-            colorFiles: ''
+            layerFile: '',
+            excelFile: '',
+            colorFile: ''
         };
     }
 
@@ -33,12 +32,8 @@ class AddElectionmapForm extends Component {
                     <input type='text' name='name' onChange={ this.handleChange } value={ this.state.name } />
                 </label>
                 <label>
-                    District Key: 
-                    <input type='text' name='districtKey' onChange={ this.handleChange } value={ this.state.districtKey } />
-                </label>
-                <label>
                     Select District Layer:
-                    <select name='districtLayer' onChange={ this.handleChange }>
+                    <select name='layerFile' onChange={ this.handleChange }>
                         { this.props.availableLayers !== undefined ? (
                             this.props.availableLayers.map((element) => {
                                 return(

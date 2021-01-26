@@ -2,40 +2,57 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { postElectionmapThunk } from '../../../redux/electionmap/electionmap.actions';
+import { 
+  fetchAvailableLayersThunk, 
+  fetchAvailableExcelFilesThunk, 
+  fetchAvailableColorFilesThunk, 
+  postElectionmapThunk,
+  postDistrictLayersThunk } 
+from '../../../redux/electionmap/electionmap.actions';
 //import electionmapReducer from '../../../redux/electionmap/electionmap.reducer';
-import { AddElectionmapForm } from '../views/index';
+import { AddDistrictLayersForm, AddElectionmapForm } from '../views/index';
 
 // Smart container;
 class ElectionmapContainer extends Component {
   componentDidMount() {
-
+    console.log("props", this.props);
+    this.props.fetchAvailableLayers();
+    this.props.fetchAvailableExcelFiles();
+    this.props.fetchAvailableColorFiles();
   }
 
   render() {
     return (
-        <AddElectionmapForm 
-            postElectionmap={ this.props.postElectionmap } 
-            availableLayers={ this.props.availableLayers }
-            availableExcelFiles={ this.props.availableExcelFiles }
-            availableColorFiles={ this.props.availableColorFiles }
-        />
+      <div>
+          <AddElectionmapForm 
+              postElectionmap={ this.props.postElectionmap } 
+              availableLayers={ this.props.availableLayers }
+              availableExcelFiles={ this.props.availableExcelFiles }
+              availableColorFiles={ this.props.availableColorFiles }
+          />
+          <AddDistrictLayersForm postDistrictLayers={ this.props.postDistrictLayers } />
+        </div>
     )
     }
 }
 
 // Map state to props;
 const mapStateToProps = (state) => {
-  console.log('state', state);
   return {
-    
+    availableLayers: state.availableLayers,
+    availableExcelFiles: state.availableExcelFiles,
+    availableColorFiles: state.availableColorFiles,
   };
 };
 
 // Map dispatch to props;
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAvailableLayers: () => dispatch(fetchAvailableLayersThunk()),
+    fetchAvailableExcelFiles: () => dispatch(fetchAvailableExcelFilesThunk()),
+    fetchAvailableColorFiles: () => dispatch(fetchAvailableColorFilesThunk()),
     postElectionmap: (electionmap) => dispatch(postElectionmapThunk(electionmap)),
+    postDistrictLayers: (layers) => dispatch(postDistrictLayersThunk(layers)),
   };
 };
 
@@ -47,6 +64,6 @@ const mapDispatchToProps = (dispatch) => {
 
 // Export our store-connected container by default;
 export default connect(
-mapStateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(ElectionmapContainer);
