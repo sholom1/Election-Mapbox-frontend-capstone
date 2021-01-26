@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import RoutesContainer from '../components/AllPlayers/routes/RoutesContainer';
+import { ElectionmapContainer } from '../components/AllPlayers/containers/index';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className="app">
         <header className="app-header">
           <RoutesContainer />
+          <ElectionmapContainer />
         </header>
       </div>
     );
