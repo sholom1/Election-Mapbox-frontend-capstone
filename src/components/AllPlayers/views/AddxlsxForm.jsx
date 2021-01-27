@@ -4,8 +4,7 @@ class AddxlsxForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			xlsxKey: '',
-			xlsxFile: null,
+			xlsxFiles: null,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -28,7 +27,8 @@ class AddxlsxForm extends Component {
 		console.log('state in render', this.state);
 		return (
 			<div>
-				<input type="file" name="xlsx" multiple onChange={this.handleChange} />
+				<label>Upload xlsx file:</label>
+				<input type="file" name="xlsxFiles" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>

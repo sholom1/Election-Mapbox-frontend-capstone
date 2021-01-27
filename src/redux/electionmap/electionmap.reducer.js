@@ -19,8 +19,10 @@ const electionmapReducer = (state = [], action) => {
 			return { ...state, availableLayers: [...state.availableLayers, ...action.payload] };
 		case ElectionmapActionTypes.POST_COLOR_FILES:
 			console.log('payload in reducer', action.payload);
-			console.log('spread action.paylod', ...action.payload)
+			console.log('spread action.paylod', ...action.payload);
 			return { ...state, availableColorFiles: [...state.availableColorFiles, ...action.payload] };
+		case ElectionmapActionTypes.POST_XLSX:
+			return { ...state, availableExcelFiles: [...state.availableExcelFiles, ...action.payload] };
 		default:
 			return state;
 	}

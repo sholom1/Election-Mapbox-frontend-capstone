@@ -44,13 +44,12 @@ export const postElectionmap = (electionmap) => {
 	};
 };
 
-
-export const postColorFiles = (colorFiles) =>{
-	return{
+export const postColorFiles = (colorFiles) => {
+	return {
 		type: ElectionmapActionTypes.POST_COLOR_FILES,
 		payload: colorFiles,
-	}
-}
+	};
+};
 
 export const postxlsxFiles = (xlsxFiles) => {
 	return {
@@ -117,53 +116,52 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 export const postxlsxFileThunk = (body) => (dispatch) => {
 	let promises = [];
 	console.log(body);
-    for (let xlsx of body.xlsx) {
-        console.log('xlsx', xlsx);
-        promises.push(readUploadedFileAsXLSX(xlsx));
-    }
-    return Promise.all(promises).then((values) => {
-        console.log('values', values);
-        body = { ...body, xlsxFiles: values };
-        console.log('body', body);
-        axios
-            .post('http://localhost:8080/api/electiondata/', body)
-            .then((res) => {
-                console.log('res', res);
-                console.log('res.data', res.data);
-                return (res.data)
-            })
-            .then((xlsx) => {
-                console.log('xlsx', xlsx);
-                dispatch(postxlsxFiles(xlsx))
-            })
-            .catch((err) => console.log(err));
-    });
-		
+	for (let xlsx of body.xlsxFiles) {
+		console.log('xlsx', xlsx);
+		promises.push(readUploadedFileAsXLSX(xlsx));
+	}
+	return Promise.all(promises).then((values) => {
+		console.log('values', values);
+		body = { ...body, xlsxFiles: values };
+		console.log('body', body);
+		axios
+			.post('http://localhost:8080/api/electiondata/', body)
+			.then((res) => {
+				console.log('res', res);
+				console.log('res.data', res.data);
+				return res.data;
+			})
+			.then((xlsx) => {
+				console.log('xlsx', xlsx);
+				dispatch(postxlsxFiles(xlsx));
+			})
+			.catch((err) => console.log(err));
+	});
 };
 
 export const postColorFilesThunk = (body) => (dispatch) => {
-    let promises = [];
-    for (let color of body.colorFiles) {
-        console.log('color', color);
-        promises.push(readUploadedFileAsJSON(color));
-    }
-    return Promise.all(promises).then((values) => {
-        console.log('values', values);
-        body = { ...body, colorFiles: values };
-        console.log('body', body);
-        axios
-            .post('http://localhost:8080/api/colordata/', body)
-            .then((res) => {
-                console.log('res', res);
-                console.log('res.data', res.data);
-                return (res.data)
-            })
-            .then((colors) => {
-                console.log('colors', colors);
-                dispatch(postColorFiles(colors))
-            })
-            .catch((err) => console.log(err));
-    });
+	let promises = [];
+	for (let color of body.colorFiles) {
+		console.log('color', color);
+		promises.push(readUploadedFileAsJSON(color));
+	}
+	return Promise.all(promises).then((values) => {
+		console.log('values', values);
+		body = { ...body, colorFiles: values };
+		console.log('body', body);
+		axios
+			.post('http://localhost:8080/api/colordata/', body)
+			.then((res) => {
+				console.log('res', res);
+				console.log('res.data', res.data);
+				return res.data;
+			})
+			.then((colors) => {
+				console.log('colors', colors);
+				dispatch(postColorFiles(colors));
+			})
+			.catch((err) => console.log(err));
+	});
 };
 
 const readUploadedFileAsJSON = (inputFile) => {
@@ -176,7 +174,7 @@ const readUploadedFileAsJSON = (inputFile) => {
 		};
 
 		temporaryFileReader.onload = () => {
-			resolve(JSON.parse(temporaryFileReader.result));
+			resolve({ name: inputFile.name, data: JSON.parse(temporaryFileReader.result) });
 		};
 		temporaryFileReader.readAsText(inputFile);
 	});
@@ -193,7 +191,7 @@ const readUploadedFileAsXLSX = (inputFile) => {
 
 		temporaryFileReader.onload = (e) => {
 			let data = e.target.result;
-			resolve(xlsx.read(data, {type: 'binary'}));
+			resolve({ name: inputFile.name, data: xlsx.read(data, { type: 'binary' }) });
 		};
 		temporaryFileReader.readAsBinaryString(inputFile);
 	});
