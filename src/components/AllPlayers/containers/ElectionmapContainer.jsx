@@ -8,9 +8,10 @@ import {
 	fetchAvailableColorFilesThunk,
 	postElectionmapThunk,
 	postDistrictLayersThunk,
+	postColorFilesThunk,
 } from '../../../redux/electionmap/electionmap.actions';
 //import electionmapReducer from '../../../redux/electionmap/electionmap.reducer';
-import { AddDistrictLayersForm, AddElectionmapForm } from '../views/index';
+import { AddDistrictLayersForm, AddElectionmapForm, AddColorFilesForm } from '../views/index';
 
 // Smart container;
 class ElectionmapContainer extends Component {
@@ -31,6 +32,7 @@ class ElectionmapContainer extends Component {
 					availableColorFiles={this.props.availableColorFiles}
 				/>
 				<AddDistrictLayersForm postDistrictLayers={this.props.postDistrictLayers} />
+				<AddColorFilesForm postColorFiles={ this.props.postColorFiles } />
 			</div>
 		);
 	}
@@ -53,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchAvailableColorFiles: () => dispatch(fetchAvailableColorFilesThunk()),
 		postElectionmap: (electionmap) => dispatch(postElectionmapThunk(electionmap)),
 		postDistrictLayers: (layers) => dispatch(postDistrictLayersThunk(layers)),
+		postColorFiles: (files) => dispatch(postColorFilesThunk(files)),
 	};
 };
 

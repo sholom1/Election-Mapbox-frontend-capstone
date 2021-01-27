@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-class AddDistrictLayersForm extends Component {
+class AddColorFilesForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			districtKey: '',
-			districtLayers: null,
+			colorFiles: null,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -21,19 +20,15 @@ class AddDistrictLayersForm extends Component {
 	}
 
 	handleUpload = async () => {
-		this.props.postDistrictLayers(this.state);
+		this.props.postColorFiles(this.state);
 	};
 
 	render() {
 		console.log('state in render', this.state);
 		return (
 			<div>
-				<label>
-					District Key:
-					<input type="text" name="districtKey" onChange={this.handleChange} value={this.state.districtKey} />
-				</label>
-                <label>Upload new district layers:</label>
-				<input type="file" name="districtLayers" multiple onChange={this.handleChange} />
+				<label>Upload new color files:</label>
+				<input type="file" name='colorFiles' multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>
@@ -42,4 +37,4 @@ class AddDistrictLayersForm extends Component {
 	}
 }
 
-export default AddDistrictLayersForm;
+export default AddColorFilesForm;
