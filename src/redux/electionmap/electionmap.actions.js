@@ -191,7 +191,9 @@ const readUploadedFileAsXLSX = (inputFile) => {
 
 		temporaryFileReader.onload = (e) => {
 			let data = e.target.result;
-			resolve({ name: inputFile.name, data: xlsx.read(data, { type: 'binary' }) });
+			let workbook = xlsx.read(data, { type: 'binary' });
+			let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+			resolve({ name: inputFile.name, data: worksheet });
 		};
 		temporaryFileReader.readAsBinaryString(inputFile);
 	});
