@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { auth } from "../../../redux/user/user.actions";
 import { AuthFormView } from "../views";
+import Navbar from '../navigation/Navbar';
 
 // Smart container;
 class AuthFormContainer extends Component {
@@ -25,15 +26,18 @@ class AuthFormContainer extends Component {
 
   render() {
     return (
-      <AuthFormView
-        name={this.props.name}
-        displayName={this.props.displayName}
-        error={this.props.error}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        isLoggedIn={this.props.isLoggedIn}
-        userEmail={this.props.userEmail}
-      />
+      <div>
+        <Navbar />
+        <AuthFormView
+          name={this.props.name}
+          displayName={this.props.displayName}
+          error={this.props.error}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          isLoggedIn={this.props.isLoggedIn}
+          userEmail={this.props.userEmail}
+        />
+      </div>
     );
   }
 };
