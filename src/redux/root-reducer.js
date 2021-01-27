@@ -8,7 +8,7 @@ import userReducer from './user/user.reducer'
 const rootReducer = combineReducers({
   players: playerReducer,
   electionmaps: electionmapReducer,
-  users: userReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
