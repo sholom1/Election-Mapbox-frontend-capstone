@@ -5,6 +5,7 @@ const ElectionmapActionTypes = {
   POST_ELECTIONMAP: 'POST_ELECTIONMAP',
   POST_DISTRICT_LAYERS: 'POST_DISTRICT_LAYERS',
   POST_COLOR_FILES: 'POST_COLOR_FILES',
+  POST_XLSX: 'POST_XLSX',
 };
 
 export default ElectionmapActionTypes;

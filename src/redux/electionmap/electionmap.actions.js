@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ElectionmapActionTypes from './electionmap.types';
+import xlsx from 'xlsx';
 
 //ACTION CREATORS
 
@@ -27,14 +28,6 @@ const fetchAvailableColorFiles = (colors) => {
 	};
 };
 
-// post new electionmap
-export const postElectionmap = (electionmap) => {
-	return {
-		type: ElectionmapActionTypes.POST_ELECTIONMAP,
-		payload: electionmap,
-	};
-};
-
 // post new district layer
 export const postDistrictLayers = (layers) => {
 	return {
@@ -43,14 +36,28 @@ export const postDistrictLayers = (layers) => {
 	};
 };
 
-// post new color file
-export const postColorFiles = (colors) => {
+// post new electionmap
+export const postElectionmap = (electionmap) => {
 	return {
-		type: ElectionmapActionTypes.POST_COLOR_FILES,
-		payload: colors,
+		type: ElectionmapActionTypes.POST_ELECTIONMAP,
+		payload: electionmap,
 	};
 };
 
+
+export const postColorFiles = (colorFiles) =>{
+	return{
+		type: ElectionmapActionTypes.POST_COLOR_FILES,
+		payload: colorFiles,
+	}
+}
+
+export const postxlsxFiles = (xlsxFiles) => {
+	return {
+		type: ElectionmapActionTypes.POST_XLSX,
+		payload: xlsxFiles,
+	};
+};
 //THUNKS
 
 // fetch available layers thunk
@@ -97,9 +104,8 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 		promises.push(readUploadedFileAsJSON(layer));
 	}
 	return Promise.all(promises).then((values) => {
-		console.log('values', values);
+		console.log(values);
 		body = { ...body, districtLayers: values };
-		console.log('body', body);
 		axios
 			.post('http://localhost:8080/api/districtlayer/', body)
 			.then((res) => res.data)
@@ -108,33 +114,58 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 	});
 };
 
-// post colorFiles thunk
-export const postColorFilesThunk = (body) => (dispatch) => {
+export const postxlsxFileThunk = (body) => (dispatch) => {
 	let promises = [];
-	for (let color of body.colorFiles) {
-		console.log('color', color);
-		promises.push(readUploadedFileAsJSON(color));
-	}
-	return Promise.all(promises).then((values) => {
-		console.log('values', values);
-		body = { ...body, colorFiles: values };
-		console.log('body', body);
-		axios
-			.post('http://localhost:8080/api/colordata/', body)
-			.then((res) => {
-				console.log('res', res);
-				console.log('res.data', res.data);
-				return (res.data)
-			})
-			.then((colors) => {
-				console.log('colors', colors);
-				dispatch(postColorFiles(colors))
-			})
-			.catch((err) => console.log(err));
-	});
+	console.log(body);
+    for (let xlsx of body.xlsx) {
+        console.log('xlsx', xlsx);
+        promises.push(readUploadedFileAsXLSX(xlsx));
+    }
+    return Promise.all(promises).then((values) => {
+        console.log('values', values);
+        body = { ...body, xlsxFiles: values };
+        console.log('body', body);
+        axios
+            .post('http://localhost:8080/api/electiondata/', body)
+            .then((res) => {
+                console.log('res', res);
+                console.log('res.data', res.data);
+                return (res.data)
+            })
+            .then((xlsx) => {
+                console.log('xlsx', xlsx);
+                dispatch(postxlsxFiles(xlsx))
+            })
+            .catch((err) => console.log(err));
+    });
+		
 };
 
-// function to read uploaded files as JSON
+export const postColorFilesThunk = (body) => (dispatch) => {
+    let promises = [];
+    for (let color of body.colorFiles) {
+        console.log('color', color);
+        promises.push(readUploadedFileAsJSON(color));
+    }
+    return Promise.all(promises).then((values) => {
+        console.log('values', values);
+        body = { ...body, colorFiles: values };
+        console.log('body', body);
+        axios
+            .post('http://localhost:8080/api/colordata/', body)
+            .then((res) => {
+                console.log('res', res);
+                console.log('res.data', res.data);
+                return (res.data)
+            })
+            .then((colors) => {
+                console.log('colors', colors);
+                dispatch(postColorFiles(colors))
+            })
+            .catch((err) => console.log(err));
+    });
+};
+
 const readUploadedFileAsJSON = (inputFile) => {
 	const temporaryFileReader = new FileReader();
 
@@ -145,9 +176,25 @@ const readUploadedFileAsJSON = (inputFile) => {
 		};
 
 		temporaryFileReader.onload = () => {
-			resolve({name: inputFile.name, data: JSON.parse(temporaryFileReader.result)});
+			resolve(JSON.parse(temporaryFileReader.result));
 		};
 		temporaryFileReader.readAsText(inputFile);
 	});
 };
 
+const readUploadedFileAsXLSX = (inputFile) => {
+	const temporaryFileReader = new FileReader();
+
+	return new Promise((resolve, reject) => {
+		temporaryFileReader.onerror = () => {
+			temporaryFileReader.abort();
+			reject(new DOMException('Problem parsing input file.'));
+		};
+
+		temporaryFileReader.onload = (e) => {
+			let data = e.target.result;
+			resolve(xlsx.read(data, {type: 'binary'}));
+		};
+		temporaryFileReader.readAsBinaryString(inputFile);
+	});
+};

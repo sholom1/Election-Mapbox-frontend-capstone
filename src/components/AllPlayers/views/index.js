@@ -2,4 +2,5 @@
 export { default as AllPlayersView } from './AllPlayersView';
 export { default as AddElectionmapForm } from './AddElectionmapForm';
 export { default as AddDistrictLayersForm } from './AddDistrictLayersForm';
-export { default as AddColorFilesForm } from './AddColorFilesForm';
+export { default as AddColorFilesForm } from './AddxlsxForm';
+export { default as AddxlsxForm } from './AddxlsxForm';
