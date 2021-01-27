@@ -1,13 +1,28 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ElectionmapContainer } from '../containers';
+import { Login, Signup, ElectionmapContainer } from '../containers';
 
-const RoutesView = () => {
+const RoutesView = (props) => {
+  const { isLoggedIn } = props;
+
   return (
     <Switch>
-      <Route exact path="/" component={ElectionmapContainer} />
+      {/* Routes placed within this section are available to all visitors */}
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={Signup} />
+
+      {isLoggedIn && (
+        <Switch>
+          {/* Routes placed within this section are only available after
+          logging in */}
+          <Route exact path="/" component={ElectionmapContainer} />
+        </Switch>
+      )}
+
+      {/* Displays our Login component as a fallback */}
+      <Route component={Login} />
     </Switch>
   );
-};
+}
 
 export default RoutesView;
