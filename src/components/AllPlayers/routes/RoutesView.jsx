@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Login, Signup, ElectionmapContainer } from '../containers';
+import { Home, CitywideLinksView, CityCouncilLinksView, CongressionalLinksView } from '../views';
 
 const RoutesView = (props) => {
   const { isLoggedIn } = props;
@@ -8,6 +9,10 @@ const RoutesView = (props) => {
   return (
     <Switch>
       {/* Routes placed within this section are available to all visitors */}
+      <Route exact path="/" component={Home} />
+      <Route exact path="/citywide" component={CitywideLinksView} />
+      <Route exact path="/citycouncil" component={CityCouncilLinksView} />
+      <Route exact path="/congressional" component={CongressionalLinksView} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
 
@@ -15,7 +20,7 @@ const RoutesView = (props) => {
         <Switch>
           {/* Routes placed within this section are only available after
           logging in */}
-          <Route exact path="/" component={ElectionmapContainer} />
+          <Route exact path="/upload" component={ElectionmapContainer} />
         </Switch>
       )}
 
