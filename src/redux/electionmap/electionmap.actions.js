@@ -27,6 +27,14 @@ const fetchAvailableColorFiles = (colors) => {
 	};
 };
 
+// post new electionmap
+export const postElectionmap = (electionmap) => {
+	return {
+		type: ElectionmapActionTypes.POST_ELECTIONMAP,
+		payload: electionmap,
+	};
+};
+
 // post new district layer
 export const postDistrictLayers = (layers) => {
 	return {
@@ -35,11 +43,11 @@ export const postDistrictLayers = (layers) => {
 	};
 };
 
-// post new electionmap
-export const postElectionmap = (electionmap) => {
+// post new color file
+export const postColorFiles = (colors) => {
 	return {
-		type: ElectionmapActionTypes.POST_ELECTIONMAP,
-		payload: electionmap,
+		type: ElectionmapActionTypes.POST_COLOR_FILES,
+		payload: colors,
 	};
 };
 
@@ -89,8 +97,9 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 		promises.push(readUploadedFileAsJSON(layer));
 	}
 	return Promise.all(promises).then((values) => {
-		console.log(values);
+		console.log('values', values);
 		body = { ...body, districtLayers: values };
+		console.log('body', body);
 		axios
 			.post('http://localhost:8080/api/districtlayer/', body)
 			.then((res) => res.data)
@@ -99,6 +108,33 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 	});
 };
 
+// post colorFiles thunk
+export const postColorFilesThunk = (body) => (dispatch) => {
+	let promises = [];
+	for (let color of body.colorFiles) {
+		console.log('color', color);
+		promises.push(readUploadedFileAsJSON(color));
+	}
+	return Promise.all(promises).then((values) => {
+		console.log('values', values);
+		body = { ...body, colorFiles: values };
+		console.log('body', body);
+		axios
+			.post('http://localhost:8080/api/colordata/', body)
+			.then((res) => {
+				console.log('res', res);
+				console.log('res.data', res.data);
+				return (res.data)
+			})
+			.then((colors) => {
+				console.log('colors', colors);
+				dispatch(postColorFiles(colors))
+			})
+			.catch((err) => console.log(err));
+	});
+};
+
+// function to read uploaded files as JSON
 const readUploadedFileAsJSON = (inputFile) => {
 	const temporaryFileReader = new FileReader();
 
@@ -109,8 +145,9 @@ const readUploadedFileAsJSON = (inputFile) => {
 		};
 
 		temporaryFileReader.onload = () => {
-			resolve(JSON.parse(temporaryFileReader.result));
+			resolve({name: inputFile.name, data: JSON.parse(temporaryFileReader.result)});
 		};
 		temporaryFileReader.readAsText(inputFile);
 	});
 };
+
