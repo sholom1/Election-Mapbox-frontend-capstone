@@ -1,40 +1,26 @@
 import React, { Component } from 'react';
+import mapboxgl from 'mapbox-gl';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import {
-	fetchAvailableLayersThunk,
-	fetchAvailableExcelFilesThunk,
-	fetchAvailableColorFilesThunk,
-	postElectionmapThunk,
-	postDistrictLayersThunk,
-	postColorFilesThunk,
-	postxlsxFileThunk,
-} from '../../../redux/electionmap/electionmap.actions';
-//import electionmapReducer from '../../../redux/electionmap/electionmap.reducer';
-import { AddDistrictLayersForm, AddElectionmapForm, AddColorFilesForm, AddxlsxForm } from '../views/index';
+import { fetchMapThunk } from '../../../redux/electionmap/electionmap.actions';
 
 // Smart container;
 class ElectionmapContainer extends Component {
 	componentDidMount() {
 		console.log('props', this.props);
-		this.props.fetchAvailableLayers();
-		this.props.fetchAvailableExcelFiles();
-		this.props.fetchAvailableColorFiles();
+		this.props.fetchMap(this.props.mapId);
+		const map = new mapboxgl.Map({
+			container: this.mapContainer,
+			style: 'mapbox://styles/mapbox/streets-v11',
+			center: [this.props.lng, this.props.lat],
+			zoom: this.props.zoom,
+		});
 	}
 
 	render() {
 		return (
 			<div>
-				<AddElectionmapForm
-					postElectionmap={this.props.postElectionmap}
-					availableLayers={this.props.availableLayers}
-					availableExcelFiles={this.props.availableExcelFiles}
-					availableColorFiles={this.props.availableColorFiles}
-				/>
-				<AddDistrictLayersForm postDistrictLayers={this.props.postDistrictLayers} />
-				<AddColorFilesForm postColorFiles={ this.props.postColorFiles } />
-				<AddxlsxForm postxlsxFiles={ this.props.postxlsxFiles } />
+				<div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
 			</div>
 		);
 	}
@@ -43,30 +29,18 @@ class ElectionmapContainer extends Component {
 // Map state to props;
 const mapStateToProps = (state) => {
 	return {
-		availableLayers: state.electionmaps.availableLayers,
-		availableExcelFiles: state.electionmaps.availableExcelFiles,
-		availableColorFiles: state.electionmaps.availableColorFiles,
+		mapData: state.electionmaps.mapData,
+		lng: 5,
+		lat: 34,
+		zoom: 2,
 	};
 };
 
 // Map dispatch to props;
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchAvailableLayers: () => dispatch(fetchAvailableLayersThunk()),
-		fetchAvailableExcelFiles: () => dispatch(fetchAvailableExcelFilesThunk()),
-		fetchAvailableColorFiles: () => dispatch(fetchAvailableColorFilesThunk()),
-		postElectionmap: (electionmap) => dispatch(postElectionmapThunk(electionmap)),
-		postDistrictLayers: (layers) => dispatch(postDistrictLayersThunk(layers)),
-		postColorFiles: (files) => dispatch(postColorFilesThunk(files)),
-		postxlsxFiles: (files) => dispatch(postxlsxFileThunk(files)),
+		fetchMap: (id) => dispatch(fetchMapThunk(id)),
 	};
 };
 
-// Type check props;
-// AllPlayersContainer.propTypes = {
-//   allPlayers: PropTypes.array.isRequired,
-//   fetchAllPlayers: PropTypes.func.isRequired,
-// };
-
-// Export our store-connected container by default;
 export default connect(mapStateToProps, mapDispatchToProps)(ElectionmapContainer);
