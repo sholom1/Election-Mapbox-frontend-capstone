@@ -13,6 +13,8 @@ const electionmapReducer = (state = [], action) => {
 			return { ...state, availableExcelFiles: action.payload };
 		case ElectionmapActionTypes.FETCH_AVAILABLE_COLOR_FILES:
 			return { ...state, availableColorFiles: action.payload };
+		case ElectionmapActionTypes.FETCH_MAP:
+			return { ...state, mapData: action.payload };
 		case ElectionmapActionTypes.POST_ELECTIONMAP:
 			return state;
 		case ElectionmapActionTypes.POST_DISTRICT_LAYERS:

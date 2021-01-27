@@ -57,6 +57,13 @@ export const postxlsxFiles = (xlsxFiles) => {
 		payload: xlsxFiles,
 	};
 };
+
+export const fetchElectionMap = (mapData) => {
+	return {
+		type: ElectionmapActionTypes.FETCH_MAP,
+		payload: mapData,
+	};
+};
 //THUNKS
 
 // fetch available layers thunk
@@ -86,6 +93,13 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 		.catch((err) => console.log(err));
 };
 
+export const fetchMapThunk = (id) => (dispatch) => {
+	return axios
+		.get(`http://localhost:8080/api/electionmap/${id}`)
+		.then((res) => res.data)
+		.then((retrievedMap) => dispatch(fetchElectionMap(retrievedMap)))
+		.catch((err) => console.log(err));
+};
 // post electionmap thunk
 export const postElectionmapThunk = (body) => (dispatch) => {
 	return axios
