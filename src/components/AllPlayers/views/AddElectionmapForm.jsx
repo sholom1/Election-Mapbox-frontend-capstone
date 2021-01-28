@@ -7,6 +7,7 @@ class AddElectionmapForm extends Component {
 
 		this.state = {
 			name: '',
+			category:'',
 			layerFile: 0,
 			excelFile: 0,
 			colorFile: 0,
@@ -15,7 +16,7 @@ class AddElectionmapForm extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		if (this.state.layerFile && this.state.colorFile && this.state.excelFile)
+		if (this.state.layerFile && this.state.colorFile && this.state.excelFile && this.state.category)
 			this.props.postElectionmap(this.state);
 	};
 
@@ -24,12 +25,36 @@ class AddElectionmapForm extends Component {
 	};
 
 	render() {
+		console.log('available categories', this.props.availableCategories);
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<label>
 					Name:
 					<input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
 				</label>
+
+
+				<label>
+					Select Category:
+					<select name="category" onChange={this.handleChange}>
+						<option value={0} selected disabled hidden>
+							Choose here
+						</option>
+						{this.props.availableCategories !== undefined ? (
+							this.props.availableCategories.map((element) => {
+								return (
+									<option key={element.name + element.id} value={element.id}>
+										{element.name}
+									</option>
+								);
+							})
+						) : (
+							<option value={0}>No Available Categories</option>
+						)}
+					</select>
+				</label>
+
+
 				<label>
 					Select District Layer:
 					<select name="layerFile" onChange={this.handleChange}>
