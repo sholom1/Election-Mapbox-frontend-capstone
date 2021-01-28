@@ -15,9 +15,7 @@ const RoutesView = (props) => {
 			<Route exact path="/congressional" component={CongressionalLinksView} />
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/signup" component={Signup} />
-			<Route exact path="/map/:id">
-				<ElectionmapContainer mapId={useParams()} />
-			</Route>
+			<Route exact path="/map/:id" component={ElectionmapContainer} />
 
 			{isLoggedIn && (
 				<Switch>

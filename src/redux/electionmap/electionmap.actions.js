@@ -127,14 +127,17 @@ export const postCategoryThunk = (body) => (dispatch) => {
 		.post('http://localhost:8080/api/electionmap/categories/', body)
 		.then((res) => res.data.name)
 		.then((category) => dispatch(postCategory(category)))
-		.catch((err) => console.log(err))
-}
+		.catch((err) => console.log(err));
+};
 
 // fetch map thunk
 export const fetchMapThunk = (id) => (dispatch) => {
 	return axios
 		.get(`http://localhost:8080/api/electionmap/${id}`)
-		.then((res) => res.data)
+		.then((res) => {
+			console.log(res);
+			return res.data;
+		})
 		.then((retrievedMap) => dispatch(fetchElectionMap(retrievedMap)))
 		.catch((err) => console.log(err));
 };
@@ -252,4 +255,3 @@ const readUploadedFileAsXLSX = (inputFile) => {
 		temporaryFileReader.readAsBinaryString(inputFile);
 	});
 };
-

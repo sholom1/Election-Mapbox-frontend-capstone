@@ -7,7 +7,7 @@ class AddElectionmapForm extends Component {
 
 		this.state = {
 			name: '',
-			category:'',
+			category: '',
 			layerFile: 0,
 			excelFile: 0,
 			colorFile: 0,
@@ -16,7 +16,7 @@ class AddElectionmapForm extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		if (this.state.layerFile && this.state.colorFile && this.state.excelFile && this.state.category)
+		if (this.state.layerFile && this.state.colorFile && this.state.excelFile /*&& this.state.category*/)
 			this.props.postElectionmap(this.state);
 	};
 
@@ -32,7 +32,6 @@ class AddElectionmapForm extends Component {
 					Name:
 					<input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
 				</label>
-
 
 				<label>
 					Select Category:
@@ -53,7 +52,6 @@ class AddElectionmapForm extends Component {
 						)}
 					</select>
 				</label>
-
 
 				<label>
 					Select District Layer:

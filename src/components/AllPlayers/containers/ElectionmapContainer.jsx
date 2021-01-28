@@ -3,12 +3,13 @@ import mapboxgl from 'mapbox-gl';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchMapThunk } from '../../../redux/electionmap/electionmap.actions';
+import { withRouter } from 'react-router-dom';
 
 // Smart container;
 class ElectionmapContainer extends Component {
 	componentDidMount() {
 		console.log('props', this.props);
-		this.props.fetchMap(this.props.mapId);
+		this.props.fetchMap(this.props.match.params.id);
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,
 			style: 'mapbox://styles/mapbox/streets-v11',
@@ -31,9 +32,9 @@ const mapStateToProps = (state) => {
 	return {
 		mapId: state.electionmaps.mapId,
 		mapData: state.electionmaps.mapData,
-		lng: 5,
-		lat: 34,
-		zoom: 2,
+		lng: -73.952319,
+		lat: 40.631056,
+		zoom: 9.91,
 	};
 };
 
@@ -44,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ElectionmapContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ElectionmapContainer));
