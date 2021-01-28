@@ -39,8 +39,7 @@
 
 .mapContainer {
 	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
+	top: 61px;
 	bottom: 0;
+	width: 100%;
 }
