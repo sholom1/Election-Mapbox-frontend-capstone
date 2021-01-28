@@ -29,6 +29,7 @@ class ElectionmapContainer extends Component {
 // Map state to props;
 const mapStateToProps = (state) => {
 	return {
+		mapId: state.electionmaps.mapId,
 		mapData: state.electionmaps.mapData,
 		lng: 5,
 		lat: 34,
