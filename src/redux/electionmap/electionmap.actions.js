@@ -83,6 +83,15 @@ export const fetchElectionMap = (mapData) => {
 		payload: mapData,
 	};
 };
+
+// fetch categorical maps
+export const fetchCategoricalMaplinks = (maplinks) => {
+	return {
+		type: ElectionmapActionTypes.FETCH_CATEGORICAL_MAPLINKS,
+		payload: maplinks,
+	};
+};
+
 //THUNKS
 
 // fetch available layers thunk
@@ -142,6 +151,7 @@ export const fetchMapThunk = (id) => (dispatch) => {
 		.then((retrievedMap) => dispatch(fetchElectionMap(retrievedMap)))
 		.catch((err) => console.log(err));
 };
+
 // post electionmap thunk
 export const postElectionmapThunk = (body) => (dispatch) => {
 	return axios
@@ -255,4 +265,23 @@ const readUploadedFileAsXLSX = (inputFile) => {
 		};
 		temporaryFileReader.readAsBinaryString(inputFile);
 	});
+};
+
+// fetch categorical maplinks thunk
+export const fetchCategoricalMaplinksThunk = (category) => async (dispatch) => {
+	// return axios
+	// 	.get(`http://localhost:8080/api/electionmap/${category}`)
+	// 	.then((res) => {
+	// 		console.log('in thunk', res);
+	// 		return res.data;
+	// 	})
+	// 	.then((retrievedMaplinks) => dispatch(fetchCategoricalMaplinks(retrievedMaplinks)))
+	// 	.catch((err) => console.log(err));
+
+	try {
+		const { data } = await axios.get(`http://localhost:8080/api/electionmap/categories/${category}`)
+		dispatch(fetchCategoricalMaplinks(data))
+	} catch (error) {
+		console.log(error);
+	}
 };

@@ -9,9 +9,9 @@ class Navbar extends Component {
                 <Link to='/login'>Log In</Link>
                 <Link to='/signup'>Sign Up</Link>
                 <Link to='/upload'>Upload</Link>
-                <Link to='/citywide'>Citywide Elections</Link>
-                <Link to='/citycouncil'>City Council Elections</Link>
-                <Link to='/congressional'>Congressional Elections</Link>
+                <Link to='/categories/citywide'>Citywide Elections</Link>
+                <Link to='/categories/citycouncil'>City Council Elections</Link>
+                <Link to='/categories/congressional'>Congressional Elections</Link>
             </div>
          );
     }

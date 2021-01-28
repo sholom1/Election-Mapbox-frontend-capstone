@@ -26,8 +26,9 @@ const electionmapReducer = (state = [], action) => {
 		case ElectionmapActionTypes.POST_XLSX:
 			return { ...state, availableExcelFiles: [...state.availableExcelFiles, ...action.payload] };
 		case ElectionmapActionTypes.POST_CATEGORY: 
-			console.log('action.payload', action.payload);
 			return {...state, availableCategories: [...state.availableCategories, action.payload]}
+		case ElectionmapActionTypes.FETCH_CATEGORICAL_MAPLINKS:
+			return { ...state, categoricalMaplinks: action.payload };
 		default:
 			return state;
 	}
