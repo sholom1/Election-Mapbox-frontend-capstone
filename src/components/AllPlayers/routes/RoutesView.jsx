@@ -1,33 +1,36 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useParams } from 'react-router-dom';
 import { Login, Signup, ElectionmapContainer } from '../containers';
 import { Home, CitywideLinksView, CityCouncilLinksView, CongressionalLinksView } from '../views';
 
 const RoutesView = (props) => {
-  const { isLoggedIn } = props;
+	const { isLoggedIn } = props;
 
-  return (
-    <Switch>
-      {/* Routes placed within this section are available to all visitors */}
-      <Route exact path="/" component={Home} />
-      <Route exact path="/citywide" component={CitywideLinksView} />
-      <Route exact path="/citycouncil" component={CityCouncilLinksView} />
-      <Route exact path="/congressional" component={CongressionalLinksView} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
+	return (
+		<Switch>
+			{/* Routes placed within this section are available to all visitors */}
+			<Route exact path="/" component={Home} />
+			<Route exact path="/citywide" component={CitywideLinksView} />
+			<Route exact path="/citycouncil" component={CityCouncilLinksView} />
+			<Route exact path="/congressional" component={CongressionalLinksView} />
+			<Route exact path="/login" component={Login} />
+			<Route exact path="/signup" component={Signup} />
+			<Route exact path="/map/:id">
+				<ElectionmapContainer mapId={useParams()} />
+			</Route>
 
-      {isLoggedIn && (
-        <Switch>
-          {/* Routes placed within this section are only available after
+			{isLoggedIn && (
+				<Switch>
+					{/* Routes placed within this section are only available after
           logging in */}
-          <Route exact path="/upload" component={ElectionmapContainer} />
-        </Switch>
-      )}
+					<Route exact path="/upload" component={ElectionmapContainer} />
+				</Switch>
+			)}
 
-      {/* Displays our Login component as a fallback */}
-      <Route component={Login} />
-    </Switch>
-  );
-}
+			{/* Displays our Login component as a fallback */}
+			<Route component={Login} />
+		</Switch>
+	);
+};
 
 export default RoutesView;
