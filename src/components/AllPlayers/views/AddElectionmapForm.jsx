@@ -32,7 +32,6 @@ class AddElectionmapForm extends Component {
 					Name:
 					<input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
 				</label>
-
 				<label>
 					Select Category:
 					<select name="category" onChange={this.handleChange}>
@@ -52,26 +51,6 @@ class AddElectionmapForm extends Component {
 						)}
 					</select>
 				</label>
-
-				<label>
-					Select District Layer:
-					<select name="layerFile" onChange={this.handleChange}>
-						<option value={0} selected disabled hidden>
-							Choose here
-						</option>
-						{this.props.availableLayers !== undefined ? (
-							this.props.availableLayers.map((element) => {
-								return (
-									<option key={element.name + element.id} value={element.id}>
-										{element.name}
-									</option>
-								);
-							})
-						) : (
-							<option value={0}>No Available Layers</option>
-						)}
-					</select>
-				</label>
 				<label>
 					Select Excel File:
 					<select name="excelFile" onChange={this.handleChange}>
@@ -88,6 +67,25 @@ class AddElectionmapForm extends Component {
 							})
 						) : (
 							<option value={-1}>No Available Files</option>
+						)}
+					</select>
+				</label>
+				<label>
+					Select District Layer:
+					<select name="layerFile" onChange={this.handleChange}>
+						<option value={0} selected disabled hidden>
+							Choose here
+						</option>
+						{this.props.availableLayers !== undefined ? (
+							this.props.availableLayers.map((element) => {
+								return (
+									<option key={element.name + element.id} value={element.id}>
+										{element.name}
+									</option>
+								);
+							})
+						) : (
+							<option value={0}>No Available Layers</option>
 						)}
 					</select>
 				</label>

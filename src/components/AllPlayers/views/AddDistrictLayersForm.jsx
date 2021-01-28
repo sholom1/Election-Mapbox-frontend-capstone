@@ -28,6 +28,7 @@ class AddDistrictLayersForm extends Component {
 		console.log('state in render', this.state);
 		return (
 			<div>
+				<label>Add new district layer: </label>
 				<label>
 					District Key:
 					<input type="text" name="districtKey" onChange={this.handleChange} value={this.state.districtKey} />
