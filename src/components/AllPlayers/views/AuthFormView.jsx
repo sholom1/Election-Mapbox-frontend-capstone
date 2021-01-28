@@ -1,4 +1,5 @@
 import React from "react";
+import {withRouter} from 'react-router-dom';
 
 const AuthFormView = props => {
   const { name, displayName, handleSubmit, error, handleChange, isLoggedIn, userEmail } = props;
@@ -28,4 +29,4 @@ const AuthFormView = props => {
   );
 };
 
-export default AuthFormView;
+export default withRouter(AuthFormView);

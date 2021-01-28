@@ -22,6 +22,7 @@ class AuthFormContainer extends Component {
 		event.preventDefault();
 		const formName = event.target.name;
 		this.props.loginOrSignup(this.state.email, this.state.password, formName);
+		this.props.history.push('/upload')
 	};
 
 	render() {
