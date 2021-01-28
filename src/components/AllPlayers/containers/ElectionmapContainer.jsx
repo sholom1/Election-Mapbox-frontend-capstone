@@ -7,14 +7,31 @@ import { withRouter } from 'react-router-dom';
 
 // Smart container;
 class ElectionmapContainer extends Component {
-	componentDidMount() {
+	async componentDidMount() {
 		console.log('props', this.props);
-		this.props.fetchMap(this.props.match.params.id);
+		await this.props.fetchMap(this.props.match.params.id);
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,
 			style: 'mapbox://styles/mapbox/streets-v11',
 			center: [this.props.lng, this.props.lat],
 			zoom: this.props.zoom,
+		});
+		map.on('load', () => {
+			map.addSource('districts', {
+				type: 'geojson',
+				data: this.props.mapData.geoJson,
+				generateId: true,
+			});
+			map.addLayer({
+				id: 'election-district-visualization',
+				type: 'fill',
+				source: 'districts',
+				layout: {},
+				paint: {
+					'fill-color': ['to-color', ['get', 'color']],
+					'fill-opacity': ['to-number', ['get', 'opacity']],
+				},
+			});
 		});
 	}
 
