@@ -6,7 +6,6 @@ import Navbar from '../navigation/Navbar';
 const Home = () => {
   return (
     <div className="home">
-      <Navbar />
       <h1>Home</h1>
       <h2>Featured maps here</h2>
     </div>

@@ -6,7 +6,6 @@ import Navbar from '../navigation/Navbar';
 const CitywideLinksView = () => {
   return (
     <div className="home">
-      <Navbar />
       <h1>View Citywide Elections</h1>
       <h2>Links go here</h2>
     </div>

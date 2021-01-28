@@ -33,6 +33,7 @@ class AddElectionMapContainer extends Component {
 					availableLayers={this.props.availableLayers}
 					availableExcelFiles={this.props.availableExcelFiles}
 					availableColorFiles={this.props.availableColorFiles}
+					availableCategories={this.props.availableCategories}
 				/>
 				<AddDistrictLayersForm postDistrictLayers={this.props.postDistrictLayers} />
 				<AddColorFilesForm postColorFiles={this.props.postColorFiles} />

@@ -6,7 +6,6 @@ import Navbar from '../navigation/Navbar';
 const CongressionalLinksView = () => {
   return (
     <div className="congressional">
-      <Navbar />
       <h1>View Congressional Elections</h1>
       <h2>Links go here</h2>
     </div>
