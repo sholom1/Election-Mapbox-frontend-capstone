@@ -9,6 +9,7 @@ const ElectionmapActionTypes = {
 	POST_COLOR_FILES: 'POST_COLOR_FILES',
 	POST_XLSX: 'POST_XLSX',
 	POST_CATEGORY: 'POST_CATEGORY',
+	FETCH_CATEGORICAL_MAPLINKS: 'FETCH_CATEGORICAL_MAPLINKS',
 };
 
 export default ElectionmapActionTypes;
