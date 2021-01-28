@@ -13,6 +13,8 @@ const electionmapReducer = (state = [], action) => {
 			return { ...state, availableExcelFiles: action.payload };
 		case ElectionmapActionTypes.FETCH_AVAILABLE_COLOR_FILES:
 			return { ...state, availableColorFiles: action.payload };
+		case ElectionmapActionTypes.FETCH_AVAILABLE_CATEGORIES:
+			return { ...state, availableCategories: action.payload };
 		case ElectionmapActionTypes.FETCH_MAP:
 			return { ...state, mapData: action.payload };
 		case ElectionmapActionTypes.POST_ELECTIONMAP:
@@ -23,6 +25,9 @@ const electionmapReducer = (state = [], action) => {
 			return { ...state, availableColorFiles: [...state.availableColorFiles, ...action.payload] };
 		case ElectionmapActionTypes.POST_XLSX:
 			return { ...state, availableExcelFiles: [...state.availableExcelFiles, ...action.payload] };
+		case ElectionmapActionTypes.POST_CATEGORY: 
+			console.log('action.payload', action.payload);
+			return {...state, availableCategories: [...state.availableCategories, action.payload]}
 		default:
 			return state;
 	}

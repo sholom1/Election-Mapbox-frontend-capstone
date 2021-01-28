@@ -6,21 +6,23 @@ import {
 	fetchAvailableLayersThunk,
 	fetchAvailableExcelFilesThunk,
 	fetchAvailableColorFilesThunk,
+	fetchAvailableCategoriesThunk,
 	postElectionmapThunk,
 	postDistrictLayersThunk,
 	postColorFilesThunk,
 	postxlsxFileThunk,
+	postCategoryThunk,
 } from '../../../redux/electionmap/electionmap.actions';
 //import electionmapReducer from '../../../redux/electionmap/electionmap.reducer';
-import { AddDistrictLayersForm, AddElectionmapForm, AddColorFilesForm, AddxlsxForm } from '../views/index';
+import { AddDistrictLayersForm, AddElectionmapForm, AddColorFilesForm, AddxlsxForm, AddCategoryForm } from '../views/index';
 
 // Smart container;
 class AddElectionMapContainer extends Component {
 	componentDidMount() {
-		console.log('props', this.props);
 		this.props.fetchAvailableLayers();
 		this.props.fetchAvailableExcelFiles();
 		this.props.fetchAvailableColorFiles();
+		this.props.fetchAvailableCategories();
 	}
 
 	render() {
@@ -35,6 +37,7 @@ class AddElectionMapContainer extends Component {
 				<AddDistrictLayersForm postDistrictLayers={this.props.postDistrictLayers} />
 				<AddColorFilesForm postColorFiles={this.props.postColorFiles} />
 				<AddxlsxForm postxlsxFiles={this.props.postxlsxFiles} />
+				<AddCategoryForm postCategory={this.props.postCategory} />
 			</div>
 		);
 	}
@@ -42,10 +45,12 @@ class AddElectionMapContainer extends Component {
 
 // Map state to props;
 const mapStateToProps = (state) => {
+	console.log('state in map', state);
 	return {
 		availableLayers: state.electionmaps.availableLayers,
 		availableExcelFiles: state.electionmaps.availableExcelFiles,
 		availableColorFiles: state.electionmaps.availableColorFiles,
+		availableCategories: state.electionmaps.availableCategories
 	};
 };
 
@@ -55,10 +60,12 @@ const mapDispatchToProps = (dispatch) => {
 		fetchAvailableLayers: () => dispatch(fetchAvailableLayersThunk()),
 		fetchAvailableExcelFiles: () => dispatch(fetchAvailableExcelFilesThunk()),
 		fetchAvailableColorFiles: () => dispatch(fetchAvailableColorFilesThunk()),
+		fetchAvailableCategories: () => dispatch(fetchAvailableCategoriesThunk()),
 		postElectionmap: (electionmap) => dispatch(postElectionmapThunk(electionmap)),
 		postDistrictLayers: (layers) => dispatch(postDistrictLayersThunk(layers)),
 		postColorFiles: (files) => dispatch(postColorFilesThunk(files)),
 		postxlsxFiles: (files) => dispatch(postxlsxFileThunk(files)),
+		postCategory: (category) => dispatch(postCategoryThunk(category)),
 	};
 };
 

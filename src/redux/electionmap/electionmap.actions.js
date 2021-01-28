@@ -28,6 +28,14 @@ const fetchAvailableColorFiles = (colors) => {
 	};
 };
 
+// fetch available categories
+const fetchAvailableCategories = (categories) => {
+	return {
+		type: ElectionmapActionTypes.FETCH_AVAILABLE_CATEGORIES,
+		payload: categories,
+	};
+};
+
 // post new district layer
 export const postDistrictLayers = (layers) => {
 	return {
@@ -44,6 +52,7 @@ export const postElectionmap = (electionmap) => {
 	};
 };
 
+// post new color files
 export const postColorFiles = (colorFiles) => {
 	return {
 		type: ElectionmapActionTypes.POST_COLOR_FILES,
@@ -51,6 +60,7 @@ export const postColorFiles = (colorFiles) => {
 	};
 };
 
+// post new xlsx files
 export const postxlsxFiles = (xlsxFiles) => {
 	return {
 		type: ElectionmapActionTypes.POST_XLSX,
@@ -58,6 +68,15 @@ export const postxlsxFiles = (xlsxFiles) => {
 	};
 };
 
+// post new category
+export const postCategory = (category) => {
+	return {
+		type: ElectionmapActionTypes.POST_CATEGORY,
+		payload: category,
+	};
+};
+
+// fetch map
 export const fetchElectionMap = (mapData) => {
 	return {
 		type: ElectionmapActionTypes.FETCH_MAP,
@@ -93,6 +112,25 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 		.catch((err) => console.log(err));
 };
 
+// fetch available categories thunk
+export const fetchAvailableCategoriesThunk = () => (dispatch) => {
+	return axios
+		.get('http://localhost:8080/api/electionmap/categories/')
+		.then((res) => res.data)
+		.then((categories) => dispatch(fetchAvailableCategories(categories)))
+		.catch((err) => console.log(err));
+};
+
+export const postCategoryThunk = (body) => (dispatch) => {
+	console.log('body in thunk', body);
+	return axios
+		.post('http://localhost:8080/api/electionmap/categories/', body)
+		.then((res) => res.data.name)
+		.then((category) => dispatch(postCategory(category)))
+		.catch((err) => console.log(err))
+}
+
+// fetch map thunk
 export const fetchMapThunk = (id) => (dispatch) => {
 	return axios
 		.get(`http://localhost:8080/api/electionmap/${id}`)
@@ -127,6 +165,7 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 	});
 };
 
+// post xlsx thunk
 export const postxlsxFileThunk = (body) => (dispatch) => {
 	let promises = [];
 	console.log(body);
@@ -153,6 +192,7 @@ export const postxlsxFileThunk = (body) => (dispatch) => {
 	});
 };
 
+// post color files thunk
 export const postColorFilesThunk = (body) => (dispatch) => {
 	let promises = [];
 	for (let color of body.colorFiles) {
@@ -212,3 +252,4 @@ const readUploadedFileAsXLSX = (inputFile) => {
 		temporaryFileReader.readAsBinaryString(inputFile);
 	});
 };
+
