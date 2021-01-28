@@ -1,0 +1,40 @@
+.links {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.innerLinksContainer {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width:fit-content;
+    background-color: lightgray;
+    border-radius:15px;
+}
+
+p {
+    padding: 5px;
+    margin: 5px;
+}
+
+.categoricalLink {
+    font-size:150%;
+    color: black;
+    text-decoration: none;
+}
+
+.categoricalLink:hover {
+    color: rgb(78, 78, 78);
+    text-decoration: none;
+}
+
+.linksContainer {
+    color: black;
+    width:fit-content;
+}
+
+.linksContainer:hover {
+    color:rgb(78, 78, 78);
+}

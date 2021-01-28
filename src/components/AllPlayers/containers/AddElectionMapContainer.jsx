@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './styles/AddElectionMapContainer.css';
 
 import {
 	fetchAvailableLayersThunk,
@@ -27,7 +28,7 @@ class AddElectionMapContainer extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='addElectionMapContainerDiv'>
 				<AddElectionmapForm
 					postElectionmap={this.props.postElectionmap}
 					availableCategories={this.props.availableCategories}

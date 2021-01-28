@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../../../redux/user/user.actions';
 import { AuthFormView } from '../views';
-import Navbar from '../navigation/Navbar';
 
 // Smart container;
 class AuthFormContainer extends Component {

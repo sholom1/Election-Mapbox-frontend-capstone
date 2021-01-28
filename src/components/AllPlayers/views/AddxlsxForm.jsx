@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/InnerForms.css';
 
 class AddxlsxForm extends Component {
 	constructor(props) {
@@ -26,9 +27,9 @@ class AddxlsxForm extends Component {
 	render() {
 		console.log('state in render', this.state);
 		return (
-			<div>
+			<div className='innerForm'>
 				<label>Upload new xlsx files:</label>
-				<input type="file" name="xlsxFiles" multiple onChange={this.handleChange} />
+				<input className='fileLoad' type="file" name="xlsxFiles" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>

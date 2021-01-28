@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/InnerForms.css';
 
 class AddDistrictLayersForm extends Component {
 	constructor(props) {
@@ -27,14 +28,14 @@ class AddDistrictLayersForm extends Component {
 	render() {
 		console.log('state in render', this.state);
 		return (
-			<div>
+			<div className='innerForm'>
 				<label>Add new district layer: </label>
 				<label>
 					District Key:
 					<input type="text" name="districtKey" onChange={this.handleChange} value={this.state.districtKey} />
 				</label>
                 <label>Upload new district layers:</label>
-				<input type="file" name="districtLayers" multiple onChange={this.handleChange} />
+				<input className='fileLoad' type="file" name="districtLayers" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>
