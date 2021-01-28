@@ -1,0 +1,18 @@
+.container {
+    padding: 15px 10px;
+    background-color: darkgray;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    padding: 15px 10px;
+}
+
+.link:hover {
+    background-color: rgb(78, 78, 78);
+}
+
+.link:active {
+    background-color: rgb(37, 37, 37);
+}

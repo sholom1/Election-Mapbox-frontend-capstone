@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/InnerForms.css';
 
 class AddColorFilesForm extends Component {
 	constructor(props) {
@@ -26,7 +27,7 @@ class AddColorFilesForm extends Component {
 	render() {
 		console.log('state in render', this.state);
 		return (
-			<div>
+			<div className='innerForm'>
 				<label>
 					Upload new color files:
 					<input type="file" name="colorFiles" multiple onChange={this.handleChange} />

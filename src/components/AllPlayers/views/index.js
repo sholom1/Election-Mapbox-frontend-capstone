@@ -8,5 +8,3 @@ export { default as AddCategoryForm } from './AddCategoryForm';
 export { default as AuthFormView } from "./AuthFormView";
 export { default as Home } from './Home';
 export { default as CategoricalLinksView } from './CategoricalLinksView';
-export { default as CityCouncilLinksView } from './CityCouncilLinksView';
-export { default as CongressionalLinksView } from './CongressionalLinksView';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useParams } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Login, Signup, ElectionmapContainer, AddElectionMapContainer } from '../containers';
 import CategoricalMaplinksContainer from '../containers/CategoricalMaplinksContainer';
 import { Home } from '../views';

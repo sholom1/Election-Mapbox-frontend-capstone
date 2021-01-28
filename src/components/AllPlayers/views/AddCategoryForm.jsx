@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/InnerForms.css';
 
 class AddCategoryForm extends Component {
 	constructor(props) {
@@ -24,7 +25,7 @@ class AddCategoryForm extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='innerForm'>
 				<label>
 					Add Category:
 					<input type="text" name="category" onChange={this.handleChange} value={this.state.category} />
