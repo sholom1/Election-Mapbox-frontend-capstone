@@ -4,6 +4,7 @@ export { default as AddElectionmapForm } from './AddElectionmapForm';
 export { default as AddDistrictLayersForm } from './AddDistrictLayersForm';
 export { default as AddColorFilesForm } from './AddColorFilesForm';
 export { default as AddxlsxForm } from './AddxlsxForm';
+export { default as AddCategoryForm } from './AddCategoryForm';
 export { default as AuthFormView } from "./AuthFormView";
 export { default as Home } from './Home';
 export { default as CitywideLinksView } from './CitywideLinksView';
