@@ -114,6 +114,7 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 
 // fetch available categories thunk
 export const fetchAvailableCategoriesThunk = () => (dispatch) => {
+
 	return axios
 		.get('http://localhost:8080/api/electionmap/categories/')
 		.then((res) => res.data)
@@ -125,7 +126,7 @@ export const postCategoryThunk = (body) => (dispatch) => {
 	console.log('body in thunk', body);
 	return axios
 		.post('http://localhost:8080/api/electionmap/categories/', body)
-		.then((res) => res.data.name)
+		.then((res) => res.data)
 		.then((category) => dispatch(postCategory(category)))
 		.catch((err) => console.log(err));
 };

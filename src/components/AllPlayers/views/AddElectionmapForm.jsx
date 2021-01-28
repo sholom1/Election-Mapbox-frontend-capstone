@@ -42,7 +42,7 @@ class AddElectionmapForm extends Component {
 						{this.props.availableCategories !== undefined ? (
 							this.props.availableCategories.map((element) => {
 								return (
-									<option key={element.name + element.id} value={element.id}>
+									<option key={element.name+element.id} value={element.id}>
 										{element.name}
 									</option>
 								);
