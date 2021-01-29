@@ -14,7 +14,7 @@
 
 .inputDiv {
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
     padding: 10px;
 }
 
