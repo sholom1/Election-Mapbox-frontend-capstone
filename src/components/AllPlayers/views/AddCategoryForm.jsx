@@ -26,8 +26,9 @@ class AddCategoryForm extends Component {
 	render() {
 		return (
 			<div className='innerForm'>
+				<h2>Add Category</h2>
 				<label>
-					Add Category:
+					Category Name:
 					<input type="text" name="category" onChange={this.handleChange} value={this.state.category} />
 				</label>
 				<button type="button" onClick={this.handleSubmit}>

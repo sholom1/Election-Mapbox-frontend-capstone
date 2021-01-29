@@ -9,7 +9,6 @@
     background-color: lightgray;
     padding: 50px 10px;
     border-radius: 15px;
-
 }
 
 .inputDiv {
@@ -43,6 +42,11 @@ button:active {
     background-color: rgb(37, 37, 37);
 }
 
+#isLoggedIn {
+    padding: 5px;
+}
+
 .errorMessage {
     padding-top: 20px;
+    color: red;
 }

@@ -28,7 +28,7 @@ class AddxlsxForm extends Component {
 		console.log('state in render', this.state);
 		return (
 			<div className='innerForm'>
-				<label>Upload new xlsx files:</label>
+				<h2>Upload New Xlsx Files</h2>
 				<input className='fileLoad' type="file" name="xlsxFiles" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload

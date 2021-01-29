@@ -28,10 +28,8 @@ class AddColorFilesForm extends Component {
 		console.log('state in render', this.state);
 		return (
 			<div className='innerForm'>
-				<label>
-					Upload new color files:
-					<input type="file" name="colorFiles" multiple onChange={this.handleChange} />
-				</label>
+				<h2>Upload New Color Files</h2>
+				<input type="file" name="colorFiles" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>

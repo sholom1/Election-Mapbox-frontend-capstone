@@ -9,13 +9,16 @@ const CategoricalLinksView = (props) => {
 
 	if(!props.categoricalMaplinks) return <h1>Loading</h1>
   return (
-    <div className="links">
-      <div className='innerLinksContainer'>
-        {props.categoricalMaplinks.map((maplink) => (
-          <div className= 'linksContainer' key={maplink.id}>
-            <p><Link className='categoricalLink' to={`/map/${maplink.id}`}>{maplink.name}</Link></p>
-          </div>
-        ))}
+    <div className='outerContainer'>
+      <div className="outerLinksContainer">
+        <h2>Available Maps</h2>
+        <ul>
+            {props.categoricalMaplinks.map((maplink) => (
+              <div className= 'innerLinksContainer' key={maplink.id}>
+                <li><Link className='categoricalLink' to={`/map/${maplink.id}`}>{maplink.name}</Link></li>
+              </div>
+            ))}
+          </ul>
       </div>
     </div>
   );

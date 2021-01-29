@@ -28,7 +28,8 @@ class AddElectionmapForm extends Component {
 		console.log('available categories', this.props.availableCategories);
 		return (
 			<div className='innerForm'>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit} id='primaryForm'>
+					<h2>Add New Election Map</h2>
 					<label>
 						Name:
 						<input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
