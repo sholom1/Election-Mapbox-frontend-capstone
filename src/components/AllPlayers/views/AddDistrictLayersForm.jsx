@@ -23,6 +23,9 @@ class AddDistrictLayersForm extends Component {
 
 	handleUpload = async () => {
 		this.props.postDistrictLayers(this.state);
+		this.setState ({
+			districtKey: '',
+		})
 	};
 
 	render() {

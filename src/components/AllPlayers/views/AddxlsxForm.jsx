@@ -20,8 +20,9 @@ class AddxlsxForm extends Component {
 		console.log('state', this.state);
 	}
 
-	handleUpload = async () => {
+	handleUpload = async (e) => {
 		this.props.postxlsxFiles(this.state);
+		this.form.reset();
 	};
 
 	render() {

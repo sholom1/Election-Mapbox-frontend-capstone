@@ -12,6 +12,16 @@ class CategoricalMaplinksContainer extends Component {
     await this.props.fetchCategoricalMaplinks(this.props.match.params.category);
   }
 
+  async componentDidUpdate (prevProps) {
+    console.log('update');
+    if(this.props.match.params.category !== prevProps.match.params.category) {
+      console.log('equal?', this.props.match.params.category !== prevProps.match.params.category)
+      console.log('prevProps', prevProps.match.params.category);
+      console.log('props',this.props.match.params.category);
+      await this.props.fetchCategoricalMaplinks(this.props.match.params.category);
+    }
+  }
+
   render() {
     if(this.props.categoricalMaplinks === []){
       return(<h1>Loading</h1>)

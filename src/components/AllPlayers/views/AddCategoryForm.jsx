@@ -12,14 +12,13 @@ class AddCategoryForm extends Component {
 
 	handleChange = (event) => {
 		event.preventDefault();
-		console.log('state in handleChange', this.state);
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
 
 	}
 
-	handleSubmit = async () => {
+	handleSubmit = async (event) => {
 		this.props.postCategory(this.state);
 	};
 

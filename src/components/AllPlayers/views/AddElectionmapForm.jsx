@@ -16,8 +16,9 @@ class AddElectionmapForm extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		if (this.state.layerFile && this.state.colorFile && this.state.excelFile && this.state.category)
+		if (this.state.layerFile && this.state.colorFile && this.state.excelFile && this.state.category) {
 			this.props.postElectionmap(this.state);
+		};
 	};
 
 	handleChange = (event) => {
