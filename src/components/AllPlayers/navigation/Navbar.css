@@ -1,12 +1,12 @@
 .container {
-    padding: 15px 10px;
+    padding: 18px 10px;
     background-color: darkgray;
 }
 
 .link {
     color: white;
     text-decoration: none;
-    padding: 15px 10px;
+    padding: 18px 10px;
 }
 
 .link:hover {
