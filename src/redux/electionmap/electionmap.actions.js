@@ -2,6 +2,13 @@ import axios from 'axios';
 import ElectionmapActionTypes from './electionmap.types';
 import xlsx from 'xlsx';
 
+/*
+TO CONNECT THIS FRONTEND TO LOCAL BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
+http://localhost:8080/
+TO CONNECT THIS FRONTEND TO HEROKU BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
+https://electionmapbox.herokuapp.com/
+*/
+
 //ACTION CREATORS
 
 // fetch available layers
