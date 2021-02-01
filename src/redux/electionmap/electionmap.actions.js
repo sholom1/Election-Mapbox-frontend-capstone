@@ -104,7 +104,7 @@ export const fetchCategoricalMaplinks = (maplinks) => {
 // fetch available layers thunk
 export const fetchAvailableLayersThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/districtlayer/')
+		.get('https://electionmapbox.herokuapp.com/api/districtlayer/')
 		.then((res) => res.data)
 		.then((layers) => dispatch(fetchAvailableLayers(layers)))
 		.catch((err) => console.log(err));
@@ -113,7 +113,7 @@ export const fetchAvailableLayersThunk = () => (dispatch) => {
 // fetch available excel files thunk
 export const fetchAvailableExcelFilesThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/electiondata/')
+		.get('https://electionmapbox.herokuapp.com/api/electiondata/')
 		.then((res) => res.data)
 		.then((files) => dispatch(fetchAvailableExcelFiles(files)))
 		.catch((err) => console.log(err));
@@ -122,7 +122,7 @@ export const fetchAvailableExcelFilesThunk = () => (dispatch) => {
 // fetch available color files thunk
 export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/colordata/')
+		.get('https://electionmapbox.herokuapp.com/api/colordata/')
 		.then((res) => res.data)
 		.then((colors) => dispatch(fetchAvailableColorFiles(colors)))
 		.catch((err) => console.log(err));
@@ -132,7 +132,7 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 export const fetchAvailableCategoriesThunk = () => (dispatch) => {
 
 	return axios
-		.get('http://localhost:8080/api/electionmap/categories/')
+		.get('https://electionmapbox.herokuapp.com/api/electionmap/categories/')
 		.then((res) => res.data)
 		.then((categories) => dispatch(fetchAvailableCategories(categories)))
 		.catch((err) => console.log(err));
@@ -141,7 +141,7 @@ export const fetchAvailableCategoriesThunk = () => (dispatch) => {
 export const postCategoryThunk = (body) => (dispatch) => {
 	console.log('body in thunk', body);
 	return axios
-		.post('http://localhost:8080/api/electionmap/categories/', body)
+		.post('https://electionmapbox.herokuapp.com/api/electionmap/categories/', body)
 		.then((res) => res.data)
 		.then((category) => dispatch(postCategory(category)))
 		.catch((err) => console.log(err));
@@ -150,7 +150,7 @@ export const postCategoryThunk = (body) => (dispatch) => {
 // fetch map thunk
 export const fetchMapThunk = (id) => (dispatch) => {
 	return axios
-		.get(`http://localhost:8080/api/electionmap/${id}`)
+		.get(`https://electionmapbox.herokuapp.com/api/electionmap/${id}`)
 		.then((res) => {
 			console.log(res);
 			return res.data;
@@ -162,7 +162,7 @@ export const fetchMapThunk = (id) => (dispatch) => {
 // post electionmap thunk
 export const postElectionmapThunk = (body) => (dispatch) => {
 	return axios
-		.post('http://localhost:8080/api/electionmap/', body)
+		.post('https://electionmapbox.herokuapp.com/api/electionmap/', body)
 		.then((res) => res.data)
 		.then((electionmap) => dispatch(postElectionmap(electionmap)))
 		.catch((err) => console.log(err));
@@ -179,7 +179,7 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 		console.log(values);
 		body = { ...body, districtLayers: values };
 		axios
-			.post('http://localhost:8080/api/districtlayer/', body)
+			.post('https://electionmapbox.herokuapp.com/api/districtlayer/', body)
 			.then((res) => res.data)
 			.then((layers) => dispatch(postDistrictLayers(layers)))
 			.catch((err) => console.log(err));
@@ -199,7 +199,7 @@ export const postxlsxFileThunk = (body) => (dispatch) => {
 		body = { ...body, xlsxFiles: values };
 		console.log('body', body);
 		axios
-			.post('http://localhost:8080/api/electiondata/', body)
+			.post('https://electionmapbox.herokuapp.com/api/electiondata/', body)
 			.then((res) => {
 				console.log('res', res);
 				console.log('res.data', res.data);
@@ -225,7 +225,7 @@ export const postColorFilesThunk = (body) => (dispatch) => {
 		body = { ...body, colorFiles: values };
 		console.log('body', body);
 		axios
-			.post('http://localhost:8080/api/colordata/', body)
+			.post('https://electionmapbox.herokuapp.com/api/colordata/', body)
 			.then((res) => {
 				console.log('res', res);
 				console.log('res.data', res.data);
@@ -286,7 +286,7 @@ export const fetchCategoricalMaplinksThunk = (category) => async (dispatch) => {
 	// 	.catch((err) => console.log(err));
 
 	try {
-		const { data } = await axios.get(`http://localhost:8080/api/electionmap/categories/${category}`)
+		const { data } = await axios.get(`https://electionmapbox.herokuapp.com/api/electionmap/categories/${category}`)
 		dispatch(fetchCategoricalMaplinks(data))
 	} catch (error) {
 		console.log(error);
