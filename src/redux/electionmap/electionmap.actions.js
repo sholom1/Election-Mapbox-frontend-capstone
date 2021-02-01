@@ -1,10 +1,11 @@
 import axios from 'axios';
 import ElectionmapActionTypes from './electionmap.types';
 import xlsx from 'xlsx';
-
+import dotenv from 'dotenv';
+dotenv.config();
 /*
 TO CONNECT THIS FRONTEND TO LOCAL BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
-http://localhost:8080/
+${process.env.BACKEND_URL}/
 TO CONNECT THIS FRONTEND TO HEROKU BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
 https://electionmapbox.herokuapp.com/
 */
@@ -130,7 +131,6 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 
 // fetch available categories thunk
 export const fetchAvailableCategoriesThunk = () => (dispatch) => {
-
 	return axios
 		.get('https://electionmapbox.herokuapp.com/api/electionmap/categories/')
 		.then((res) => res.data)
@@ -277,7 +277,7 @@ const readUploadedFileAsXLSX = (inputFile) => {
 // fetch categorical maplinks thunk
 export const fetchCategoricalMaplinksThunk = (category) => async (dispatch) => {
 	// return axios
-	// 	.get(`http://localhost:8080/api/electionmap/${category}`)
+	// 	.get(`${process.env.BACKEND_URL}/api/electionmap/${category}`)
 	// 	.then((res) => {
 	// 		console.log('in thunk', res);
 	// 		return res.data;
