@@ -15,25 +15,34 @@ class AddDistrictLayersForm extends Component {
 
 	handleChange(event) {
 		event.preventDefault();
-		this.setState({
-			[event.target.name]: event.target.files,
-		});
+
+		if(event.target.name === 'districtKey'){
+			this.setState({
+				[event.target.name]: event.target.value,
+			});
+		}
+		else{
+			this.setState({
+				[event.target.name]: event.target.files,
+			});			
+		}
+
 		console.log('state', this.state);
 	}
 
-	handleKeyChange(event) {
-		event.preventDefault();
-		this.setState({
-			[event.target.name]: event.target.value,
-		});
-		console.log('state', this.state);
-	}
+	// handleKeyChange(event) {
+	// 	event.preventDefault();
+	// 	this.setState({
+	// 		[event.target.name]: event.target.value,
+	// 	});
+	// 	console.log('state', this.state);
+	// }
 
 	handleUpload = async () => {
 		this.props.postDistrictLayers(this.state);
-		this.setState ({
-			districtKey: '',
-		})
+		// this.setState ({
+		// 	districtKey: '',
+		// })
 	};
 
 	render() {
@@ -43,7 +52,7 @@ class AddDistrictLayersForm extends Component {
 				<h2>Upload New District Layer</h2>
 				<label>
 					District Key:
-					<input type="text" name="districtKey" onChange={this.handleKeyChange} value={this.state.districtKey} />
+					<input type="text" name="districtKey" onChange={this.handleChange} value={this.state.districtKey} />
 				</label>
                 <label>Upload new district layers:</label>
 				<input className='fileLoad' type="file" name="districtLayers" multiple onChange={this.handleChange} />
