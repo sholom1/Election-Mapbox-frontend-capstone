@@ -1,10 +1,11 @@
 import axios from 'axios';
 import ElectionmapActionTypes from './electionmap.types';
 import xlsx from 'xlsx';
-
+import dotenv from 'dotenv';
+dotenv.config();
 /*
 TO CONNECT THIS FRONTEND TO LOCAL BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
-http://localhost:8080/
+${process.env.BACKEND_URL}/
 TO CONNECT THIS FRONTEND TO HEROKU BACKEND, ALL LINKS IN THIS FILE MUST BEGIN WITH:
 https://electionmapbox.herokuapp.com/
 */
@@ -104,7 +105,7 @@ export const fetchCategoricalMaplinks = (maplinks) => {
 // fetch available layers thunk
 export const fetchAvailableLayersThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/districtlayer/')
+		.get(`${process.env.BACKEND_URL}/api/districtlayer/`)
 		.then((res) => res.data)
 		.then((layers) => dispatch(fetchAvailableLayers(layers)))
 		.catch((err) => console.log(err));
@@ -113,7 +114,7 @@ export const fetchAvailableLayersThunk = () => (dispatch) => {
 // fetch available excel files thunk
 export const fetchAvailableExcelFilesThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/electiondata/')
+		.get(`${process.env.BACKEND_URL}/api/electiondata/`)
 		.then((res) => res.data)
 		.then((files) => dispatch(fetchAvailableExcelFiles(files)))
 		.catch((err) => console.log(err));
@@ -122,7 +123,7 @@ export const fetchAvailableExcelFilesThunk = () => (dispatch) => {
 // fetch available color files thunk
 export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 	return axios
-		.get('http://localhost:8080/api/colordata/')
+		.get(`${process.env.BACKEND_URL}/api/colordata/`)
 		.then((res) => res.data)
 		.then((colors) => dispatch(fetchAvailableColorFiles(colors)))
 		.catch((err) => console.log(err));
@@ -130,9 +131,8 @@ export const fetchAvailableColorFilesThunk = () => (dispatch) => {
 
 // fetch available categories thunk
 export const fetchAvailableCategoriesThunk = () => (dispatch) => {
-
 	return axios
-		.get('http://localhost:8080/api/electionmap/categories/')
+		.get(`${process.env.BACKEND_URL}/api/electionmap/categories/`)
 		.then((res) => res.data)
 		.then((categories) => dispatch(fetchAvailableCategories(categories)))
 		.catch((err) => console.log(err));
@@ -141,7 +141,7 @@ export const fetchAvailableCategoriesThunk = () => (dispatch) => {
 export const postCategoryThunk = (body) => (dispatch) => {
 	console.log('body in thunk', body);
 	return axios
-		.post('http://localhost:8080/api/electionmap/categories/', body)
+		.post(`${process.env.BACKEND_URL}/api/electionmap/categories/`, body)
 		.then((res) => res.data)
 		.then((category) => dispatch(postCategory(category)))
 		.catch((err) => console.log(err));
@@ -150,7 +150,7 @@ export const postCategoryThunk = (body) => (dispatch) => {
 // fetch map thunk
 export const fetchMapThunk = (id) => (dispatch) => {
 	return axios
-		.get(`http://localhost:8080/api/electionmap/${id}`)
+		.get(`${process.env.BACKEND_URL}/api/electionmap/${id}`)
 		.then((res) => {
 			console.log(res);
 			return res.data;
@@ -162,7 +162,7 @@ export const fetchMapThunk = (id) => (dispatch) => {
 // post electionmap thunk
 export const postElectionmapThunk = (body) => (dispatch) => {
 	return axios
-		.post('http://localhost:8080/api/electionmap/', body)
+		.post(`${process.env.BACKEND_URL}/api/electionmap/`, body)
 		.then((res) => res.data)
 		.then((electionmap) => dispatch(postElectionmap(electionmap)))
 		.catch((err) => console.log(err));
@@ -179,7 +179,7 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 		console.log(values);
 		body = { ...body, districtLayers: values };
 		axios
-			.post('http://localhost:8080/api/districtlayer/', body)
+			.post(`${process.env.BACKEND_URL}/api/districtlayer/`, body)
 			.then((res) => res.data)
 			.then((layers) => dispatch(postDistrictLayers(layers)))
 			.catch((err) => console.log(err));
@@ -199,7 +199,7 @@ export const postxlsxFileThunk = (body) => (dispatch) => {
 		body = { ...body, xlsxFiles: values };
 		console.log('body', body);
 		axios
-			.post('http://localhost:8080/api/electiondata/', body)
+			.post(`${process.env.BACKEND_URL}/api/electiondata/`, body)
 			.then((res) => {
 				console.log('res', res);
 				console.log('res.data', res.data);
@@ -225,7 +225,7 @@ export const postColorFilesThunk = (body) => (dispatch) => {
 		body = { ...body, colorFiles: values };
 		console.log('body', body);
 		axios
-			.post('http://localhost:8080/api/colordata/', body)
+			.post(`${process.env.BACKEND_URL}/api/colordata/`, body)
 			.then((res) => {
 				console.log('res', res);
 				console.log('res.data', res.data);
@@ -277,7 +277,7 @@ const readUploadedFileAsXLSX = (inputFile) => {
 // fetch categorical maplinks thunk
 export const fetchCategoricalMaplinksThunk = (category) => async (dispatch) => {
 	// return axios
-	// 	.get(`http://localhost:8080/api/electionmap/${category}`)
+	// 	.get(`${process.env.BACKEND_URL}/api/electionmap/${category}`)
 	// 	.then((res) => {
 	// 		console.log('in thunk', res);
 	// 		return res.data;
@@ -286,8 +286,8 @@ export const fetchCategoricalMaplinksThunk = (category) => async (dispatch) => {
 	// 	.catch((err) => console.log(err));
 
 	try {
-		const { data } = await axios.get(`http://localhost:8080/api/electionmap/categories/${category}`)
-		dispatch(fetchCategoricalMaplinks(data))
+		const { data } = await axios.get(`${process.env.BACKEND_URL}/api/electionmap/categories/${category}`);
+		dispatch(fetchCategoricalMaplinks(data));
 	} catch (error) {
 		console.log(error);
 	}
