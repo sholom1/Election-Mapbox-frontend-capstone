@@ -22,8 +22,6 @@ class AddxlsxForm extends Component {
 
 	handleUpload = async (e) => {
 		this.props.postxlsxFiles(this.state);
-		this.setState({ xlsxFiles: '' });
-		//this.form.reset();
 	};
 
 	render() {
@@ -31,14 +29,7 @@ class AddxlsxForm extends Component {
 		return (
 			<div className="innerForm">
 				<h2>Upload New Xlsx Files</h2>
-				<input
-					className="fileLoad"
-					type="file"
-					name="xlsxFiles"
-					multiple
-					onChange={this.handleChange}
-					value={this.state.xlsxFiles}
-				/>
+				<input className="fileLoad" type="file" name="xlsxFiles" multiple onChange={this.handleChange} />
 				<button type="button" onClick={this.handleUpload}>
 					Upload
 				</button>
