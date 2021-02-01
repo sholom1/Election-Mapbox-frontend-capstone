@@ -15,17 +15,34 @@ class AddDistrictLayersForm extends Component {
 
 	handleChange(event) {
 		event.preventDefault();
-		this.setState({
-			[event.target.name]: event.target.files,
-		});
+
+		if(event.target.name === 'districtKey'){
+			this.setState({
+				[event.target.name]: event.target.value,
+			});
+		}
+		else{
+			this.setState({
+				[event.target.name]: event.target.files,
+			});			
+		}
+
 		console.log('state', this.state);
 	}
 
+	// handleKeyChange(event) {
+	// 	event.preventDefault();
+	// 	this.setState({
+	// 		[event.target.name]: event.target.value,
+	// 	});
+	// 	console.log('state', this.state);
+	// }
+
 	handleUpload = async () => {
 		this.props.postDistrictLayers(this.state);
-		this.setState ({
-			districtKey: '',
-		})
+		// this.setState ({
+		// 	districtKey: '',
+		// })
 	};
 
 	render() {
