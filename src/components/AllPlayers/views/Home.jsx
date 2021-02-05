@@ -7,7 +7,10 @@ const Home = () => {
 	return (
 		<div className="home">
 			<h1 id='homeHeader'>Use the navigation bar above to view hyperlocal  results for specific elections</h1>
-			<img id='homeImg' src='./images/bigPic2.jpeg' alt='map of NYC' />
+			<h2 id='trending'>Maps from recent elections</h2>
+			{/* <img id='homeImg' src='./images/2020-President-General-Election.png' alt='2020 election map' /> */}
+			<img id='homeImg' src='https://www.nycelectionmaps.com/wp-content/uploads/2020/12/Pasted-into-2020-President-General-Election.png' alt='2020 election map' />
+
 		</div>
 	);
 };

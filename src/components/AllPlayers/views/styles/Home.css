@@ -6,6 +6,11 @@
 
 #homeHeader {
     padding: 20px 5px;
+    padding-bottom: 30px;
+}
+
+#trending {
+    text-decoration: underline;
 }
 
 #homeImg {
