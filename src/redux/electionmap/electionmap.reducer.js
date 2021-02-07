@@ -5,7 +5,7 @@ import ElectionmapActionTypes from './electionmap.types';
 // };
 
 const electionmapReducer = (state = [], action) => {
-	console.log('PL', action);
+	// console.log('PL', action);
 	switch (action.type) {
 		case ElectionmapActionTypes.FETCH_AVAILABLE_LAYERS:
 			return { ...state, availableLayers: action.payload };

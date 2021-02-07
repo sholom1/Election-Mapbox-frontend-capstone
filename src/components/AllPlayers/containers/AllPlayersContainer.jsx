@@ -9,7 +9,7 @@ import { AllPlayersView } from '../views';
 class AllPlayersContainer extends Component {
   componentDidMount() {
     this.props.fetchAllPlayers();
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   render() {
@@ -19,7 +19,7 @@ class AllPlayersContainer extends Component {
 
 // Map state to props;
 const mapStateToProps = (state) => {
-  console.log('state', state);
+  // console.log('state', state);
   return {
     allPlayers: state.players.allPlayers,
   };

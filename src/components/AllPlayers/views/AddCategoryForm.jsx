@@ -7,7 +7,7 @@ class AddCategoryForm extends Component {
 		this.state = {
 			category: '',
 		};
-		console.log('in constructor', this.state);
+		// console.log('in constructor', this.state);
 	}
 
 	handleChange = (event) => {

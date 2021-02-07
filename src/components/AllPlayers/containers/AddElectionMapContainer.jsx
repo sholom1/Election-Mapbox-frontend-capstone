@@ -47,7 +47,7 @@ class AddElectionMapContainer extends Component {
 
 // Map state to props;
 const mapStateToProps = (state) => {
-	console.log('state in map', state);
+	// console.log('state in map', state);
 	return {
 		availableLayers: state.electionmaps.availableLayers,
 		availableExcelFiles: state.electionmaps.availableExcelFiles,

@@ -137,7 +137,7 @@ export const fetchAvailableCategoriesThunk = () => (dispatch) => {
 };
 
 export const postCategoryThunk = (body) => (dispatch) => {
-	console.log('body in thunk', body);
+	// console.log('body in thunk', body);
 	return axios
 		.post(`${process.env.REACT_APP_BACKEND_URL}/api/electionmap/categories/`, body)
 		.then((res) => res.data)
@@ -150,7 +150,7 @@ export const fetchMapThunk = (id) => (dispatch) => {
 	return axios
 		.get(`${process.env.REACT_APP_BACKEND_URL}/api/electionmap/${id}`)
 		.then((res) => {
-			console.log(res);
+			// console.log(res);
 			return res.data;
 		})
 		.then((retrievedMap) => dispatch(fetchElectionMap(retrievedMap)))
@@ -174,7 +174,7 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 		promises.push(readUploadedFileAsJSON(layer));
 	}
 	return Promise.all(promises).then((values) => {
-		console.log(values);
+		// console.log(values);
 		body = { ...body, districtLayers: values };
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/api/districtlayer/`, body)
@@ -187,24 +187,24 @@ export const postDistrictLayersThunk = (body) => (dispatch) => {
 // post xlsx thunk
 export const postxlsxFileThunk = (body) => (dispatch) => {
 	let promises = [];
-	console.log(body);
+	// console.log(body);
 	for (let xlsx of body.xlsxFiles) {
-		console.log('xlsx', xlsx);
+		// console.log('xlsx', xlsx);
 		promises.push(readUploadedFileAsXLSX(xlsx));
 	}
 	return Promise.all(promises).then((values) => {
-		console.log('values', values);
+		// console.log('values', values);
 		body = { ...body, xlsxFiles: values };
-		console.log('body', body);
+		// console.log('body', body);
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/api/electiondata/`, body)
 			.then((res) => {
-				console.log('res', res);
-				console.log('res.data', res.data);
+				// console.log('res', res);
+				// console.log('res.data', res.data);
 				return res.data;
 			})
 			.then((xlsx) => {
-				console.log('xlsx', xlsx);
+				// console.log('xlsx', xlsx);
 				dispatch(postxlsxFiles(xlsx));
 			})
 			.catch((err) => console.log(err));
@@ -215,18 +215,18 @@ export const postxlsxFileThunk = (body) => (dispatch) => {
 export const postColorFilesThunk = (body) => (dispatch) => {
 	let promises = [];
 	for (let color of body.colorFiles) {
-		console.log('color', color);
+		// console.log('color', color);
 		promises.push(readUploadedFileAsJSON(color));
 	}
 	return Promise.all(promises).then((values) => {
-		console.log('values', values);
+		// console.log('values', values);
 		body = { ...body, colorFiles: values };
-		console.log('body', body);
+		// console.log('body', body);
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/api/colordata/`, body)
 			.then((res) => {
-				console.log('res', res);
-				console.log('res.data', res.data);
+				// console.log('res', res);
+				// console.log('res.data', res.data);
 				return res.data;
 			})
 			.then((colors) => {

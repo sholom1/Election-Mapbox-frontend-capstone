@@ -17,7 +17,7 @@ class AddxlsxForm extends Component {
 		this.setState({
 			[event.target.name]: event.target.files,
 		});
-		console.log('state', this.state);
+		// console.log('state', this.state);
 	}
 
 	handleUpload = async (e) => {
@@ -25,7 +25,7 @@ class AddxlsxForm extends Component {
 	};
 
 	render() {
-		console.log('state in render', this.state);
+		// console.log('state in render', this.state);
 		return (
 			<div className="innerForm">
 				<h2>Upload New Xlsx Files</h2>

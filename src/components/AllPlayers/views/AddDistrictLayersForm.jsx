@@ -27,7 +27,7 @@ class AddDistrictLayersForm extends Component {
 			});			
 		}
 
-		console.log('state', this.state);
+		// console.log('state', this.state);
 	}
 
 	// handleKeyChange(event) {

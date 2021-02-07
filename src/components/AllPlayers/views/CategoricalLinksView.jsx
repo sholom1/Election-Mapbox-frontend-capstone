@@ -5,7 +5,7 @@ import './styles/CategoricalLinksView.css'
 // import PropTypes from 'prop-types';
 
 const CategoricalLinksView = (props) => {
-	console.log('CV props', props)
+	// console.log('CV props', props)
 
 	if(!props.categoricalMaplinks) return <h1>Loading</h1>
   return (

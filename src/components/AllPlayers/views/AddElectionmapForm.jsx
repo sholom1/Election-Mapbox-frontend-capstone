@@ -26,7 +26,7 @@ class AddElectionmapForm extends Component {
 	};
 
 	render() {
-		console.log('available categories', this.props.availableCategories);
+		// console.log('available categories', this.props.availableCategories);
 		return (
 			<div className='innerForm'>
 				<form onSubmit={this.handleSubmit} id='primaryForm'>

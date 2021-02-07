@@ -13,7 +13,7 @@ export const fetchAllPlayersThunk = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get('https://electionmapbox.herokuapp.com/api/players');
-      console.log('data', data);
+      // console.log('data', data);
       dispatch(fetchAllPlayers(data));
     } catch (error) {
       console.error(error);

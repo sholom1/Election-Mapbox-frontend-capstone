@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 // Smart container;
 class ElectionmapContainer extends Component {
 	async componentDidMount() {
-		console.log('props', this.props);
+		// console.log('props', this.props);
 		await this.props.fetchMap(this.props.match.params.id);
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,

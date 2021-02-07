@@ -3,7 +3,7 @@ import './styles/AllPlayersView.css';
 // import PropTypes from 'prop-types';
 
 const AllPlayersView = (props) => {
-  console.log('APV props', props)
+  // console.log('APV props', props)
   return (
     <div className="all-players">
       {props.allPlayers.map((player) => (
